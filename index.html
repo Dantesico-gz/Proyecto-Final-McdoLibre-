@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>TianguisLibre</title>
+    <style >
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .header {
+            background-color: #F7D755;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #F7D755;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .search-bar {
+            width: 30%;
+            height: 30px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-image: url(Lupita-removebg-preview.png);
+        background-position: 450px 10px;
+        background-repeat: no-repeat;
+        background-size: 3.5%;
+        padding-left: 30px;
+        }
+        
+        
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #333;
+        }
+        
+        .bottom-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .categories {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .categories a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 5px;
+            margin-right: 5px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .categories a:hover {
+            opacity: 0.7;
+        }
+        
+        .categories-list {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .categories-list a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .categories-list a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .login-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .login-links a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 10px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .login-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .postal-code {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+        
+        .postal-code input {
+            width: 90px;
+            height: 30px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    border-radius: 10px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%;
+    text-align: center;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#sign-up-form {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+#sign-up-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#sign-up-form input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#sign-up-submit-button {
+    width: 100%;
+    height: 30px;
+    background-color: #F7D755;
+    color: #000;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sign-up-submit-button:hover {
+    background-color: #d8bb15;
+}
+
+#sign-up-button {
+    background-color: #F7D755;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#sign-up-button:hover {
+    background-color: #d8bb15;
+}
+
+#log-in-button {
+    background-color: #F7D755;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#log-in-button:hover {
+    background-color: #d8bb15;
+}
+
+#log-in-form {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+#log-in-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#log-in-form input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#log-in-submit-button {
+    width: 100%;
+    height: 30px;
+    background-color: #F7D755;
+    color: #000;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#log-in-submit-button:hover {
+    background-color: #d8bb15;
+}
+
+#log-in-modal .modal-content {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+#user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#user-info span {
+    font-size: 18px;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="search-bar-container">
+            <div class="logo"> <img src="dantesinlogo-removebg-preview.png" alt="Logo">TianguisLibre</div>
+            <input type="text" class="search-bar" placeholder="Búsquele mi wera...">
+        </div>
+        <div class="bottom-links">
+            <div class="postal-code">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <input type="text" placeholder="Código Postal">
+                <img src="https://flagpedia.net/data/flags/icon/72x54/mx.png" alt="Mexico Flag" style="width: 30px; height: 30px; margin-left: 20px;">
+            </div>
+            <div class="categories">
+                <span>Categorías > </span>
+                <div class="categories-list" id="categories-list">
+                    <a href="#" style="margin-left: 20px;">Electrónicos</a>
+                    <a href="#" style="margin-left: 20px;">Ropa</a>
+                    <a href="#" style="margin-left: 20px;">Hogar y Jardín</a>
+                    <a href="#" style="margin-left: 20px;">Gamer Zone</a>
+                    <a href="#" style="margin-left: 20px;">Juguetería</a>
+                </div>
+                <a href="#" style="margin-left: 20px;">Tecnología</a>
+                <a href="#" style="margin-left: 20px;">Electrodomésticos</a>
+                <a href="#" style="margin-left: 20px;">Moda</a>
+                <a href="#" style="margin-left: 20px;">Juguetes</a>
+                <a href="#" style="margin-left: 20px;">Mueblería</a>
+            </div>
+            <div class="login-links">
+                <button id="sign-up-button">Sign Up</button>
+                <button id="log-in-button">Log In</button>
+            </div>
+        </div>
+
+        <div id="sign-up-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign In</h2>
+                <form id="sign-up-form">
+                    <label for="sign-up-username">Username:</label>
+                    <input type="text" id="sign-up-username" name="username"><br><br>
+                    <label for="sign-up-email">Email:</label>
+                    <input type="email" id="sign-up-email" name="email"><br><br>
+                    <label for="sign-up-password">Password:</label>
+                    <input type="password" id="sign-up-password" name="password"><br><br>
+                    <label for="sign-up-confirm-password">Confirmar Password:</label>
+                    <input type="password" id="sign-up-confirm-password" name="confirm-password"><br><br>
+                    <button id="sign-up-submit-button">Vamos!</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="log-in-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Log In</h2>
+                <form id="log-in-form">
+                    <label for="log-in-username">Username:</label>
+                    <input type="text" id="log-in-username" name="username"><br><br>
+                    <label for="log-in-password">Password:</label>
+                    <input type="password" id="log-in-password" name="password"><br><br>
+                    <button id="log-in-submit-button">Bienvenido de vuelta!</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="user-info"></div>
+      
+    </header>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    var categoriesList = document.getElementById("categories-list");
+    var categoriesSpan = document.querySelector(".categories > span");
+
+    categoriesSpan.addEventListener("click", function() {
+        if (categoriesList.style.display === "block") {
+            categoriesList.style.display = "none";
+        } else {
+            categoriesList.style.display = "block";
+        }
+    });
+
+    document.addEventListener("click", function(event) {
+        if (!categoriesSpan.contains(event.target) && !categoriesList.contains(event.target)) {
+            categoriesList.style.display = "none";
+        }
+    });
+});
+
+// Get the sign up button and modal
+var signUpButton = document.getElementById("sign-up-button");
+var signUpModal = document.getElementById("sign-up-modal");
+
+// Get the close button for the sign up modal
+var signUpCloseButton = document.getElementsByClassName("close")[0];
+
+// Get the sign up form and submit button
+var signUpForm = document.getElementById("sign-up-form");
+var signUpSubmitButton = document.getElementById("sign-up-submit-button");
+
+// Get the log in button and modal
+var logInButton = document.getElementById("log-in-button");
+var logInModal = document.getElementById("log-in-modal");
+
+// Get the close button for the log in modal
+var logInCloseButton = document.getElementsByClassName("close")[1];
+
+// Get the log in form and submit button
+var logInForm = document.getElementById("log-in-form");
+var logInSubmitButton = document.getElementById("log-in-submit-button");
+
+// Add event listeners to the buttons and forms
+signUpButton.onclick = function() {
+    signUpModal.style.display = "block";
+}
+
+signUpCloseButton.onclick = function() {
+    signUpModal.style.display = "none";
+}
+
+signUpSubmitButton.onclick = function(event) {
+    event.preventDefault();
+    var username = document.getElementById("sign-up-username").value;
+    var email = document.getElementById("sign-up-email").value;
+    var password = document.getElementById("sign-up-password").value;
+    var confirmPassword = document.getElementById("sign-up-confirm-password").value;
+
+    // Check if the passwords match
+    if (password != confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
+
+    // Add the user to the database
+    signUp(username, email, password);
+
+    // Close the modal
+    signUpModal.style.display = "none";
+}
+
+logInButton.onclick = function() {
+    logInModal.style.display = "block";
+}
+
+logInCloseButton.onclick = function() {
+    logInModal.style.display = "none";
+}
+
+logInSubmitButton.onclick = function(event) {
+    event.preventDefault();
+    var username = document.getElementById("log-in-username").value;
+    var password = document.getElementById("log-in-password").value;
+
+    // Log in the user
+    logIn(username, password);
+
+    // Close the modal
+    logInModal.style.display = "none";
+}
+
+// Function to sign up the user
+function signUp(username, email, password) {
+    // Check if the username is already taken
+    for (var i = 0; i < database.users.length; i++) {
+        if (database.users[i].username === username) {
+            alert("Username is already taken");
+            return;
+        }
+    }
+
+    // Add the new user to the database
+    database.users.push({
+        username: username,
+        email: email,
+        password: password
+    });
+
+    // Log in the user
+    logIn(username, password);
+}
+
+// Function to log in the user
+function logIn(username, password) {
+    // Check if the username and password are correct
+    for (var i = 0; i < database.users.length; i++) {
+        if (database.users[i].username === username && database.users[i].password === password) {
+            // Log in the user
+            displayUser  (username);
+            return;
+        }
+    }
+
+    // If the username and password are incorrect, display an error message
+    alert("O tu user o tu contra están mal papi");
+}
+
+// Function to display the user's information
+function displayUser  (username) {
+    // Get the user's information from the database
+    for (var i = 0; i < database.users.length; i++) {
+        if (database.users[i].username === username) {
+            // Display the user's information
+            document.getElementById("sign-up-button").style.display = "none";
+            document.getElementById("log-in-button").style.display = "none";
+            document.getElementById("user-info").innerHTML = `
+                <img src="descarga.jpg" alt="">
+                <span>${username}</span>
+            `;
+            return;
+        }
+    }
+}
+
+// Create a database object to store the user information
+var database = {
+    users: [
+        {
+            username: "elDiego",
+            email: "eldiego@example.com",
+            password: "password123"
+        },
+        {
+            username: "Dantesin",
+            email: "dantesin@example.com",
+            password: "password123"
+        }
+    ]
+};
+
+document.querySelector('.logo').addEventListener('click', function() {
+    location.reload();
+});
+</script>
+
+</body>
